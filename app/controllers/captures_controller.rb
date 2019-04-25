@@ -2,7 +2,7 @@ class CapturesController < ApplicationController
   protect_from_forgery :except => [:create]
   def index
     @captures = Capture.all
-    render json: @captures
+    render "captures/new.html.erb"
   end
 
   def show
