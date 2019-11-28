@@ -104,6 +104,7 @@ https://qiita.com/kb10uy/items/976a52f687bcb7745fc7
         # make
         # make install
 
+<!---
 ### ruby
 
         $ sudo apt-get update
@@ -111,11 +112,11 @@ https://qiita.com/kb10uy/items/976a52f687bcb7745fc7
         $ sudo apt-get install rbenv
         $ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
         $ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-        $ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build &&\
+        $ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
         $ rbenv install 2.6.2
         $ rbenv global 2.6.2
 
-### rails
+### Rails&MySQL
 
         $ sudo apt-get update
         $ sudo apt-get upgrade
@@ -128,6 +129,7 @@ https://qiita.com/kb10uy/items/976a52f687bcb7745fc7
         $ bundle install
 
 - `$ bundle install`がうまく通らない場合`Gemfile.lock`を削除する
+--->
 
 ## 本リポジトリの使い方
 
