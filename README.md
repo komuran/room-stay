@@ -16,7 +16,7 @@ https://github.com/seemoo-lab/nexmon
 - 本リポジトリ取得
 
         $ git clone git@github.com:komuran/room-stay.git
-        $ cd room-stay
+        $ cd room-stay/raspberry_pi
 
 - rootで実行されているか確認
 
@@ -38,20 +38,20 @@ https://github.com/seemoo-lab/nexmon
 
 - rootで実行されているか確認
 
-        $ cd room-stay
+        $ cd room-stay/raspberry_pi
         $ sudo su
 
 - モード切り替えに対応する準備
 
         # make nexmon/setup1
         # cd ~/nexmon && source setup_env.sh && make 
-        # cd /home/(ユーザ名)/room-stay
+        # cd /home/(ユーザ名)/room-stay/raspberry_pi
         # make nexmon/setup2
 
 - モニターモードパッチの使用
 
         # iw phy `iw dev wlan0 info | gawk '/wiphy/ {printf "phy" $2}'` interface add mon0 type monitor
-	    # ifconfig mon0 up
+        # ifconfig mon0 up
 
 - 再起動後でも自動的にドライバが使えるようにする
         
@@ -71,6 +71,7 @@ http://libtins.github.io/download/
 - rootで実行されているか確認
 
         $ sudo su
+        $ cd
 
 - libtinsを使えるようにする
 
@@ -96,10 +97,10 @@ https://qiita.com/kb10uy/items/976a52f687bcb7745fc7
 - rootで実行されているか確認
 
         $ sudo su
+        $ cd
 
 - curlを使えるようにする
 
-        # cd
         # wget http://curl.haxx.se/download/curl-7.40.0.tar.gz
         # tar xvf curl-7.40.0.tar.gz
         # cd ~/curl-7.40.0
@@ -179,7 +180,7 @@ https://qiita.com/kb10uy/items/976a52f687bcb7745fc7
 
 - capture.cppをコンパイルし，実行する
 
-        $ cd room-stay
+        $ cd room-stay/raspberry_pi
         $ g++ -g3 capture.cpp -o capture -ltins -lcurl
         $ sudo ./capture mon0
 
