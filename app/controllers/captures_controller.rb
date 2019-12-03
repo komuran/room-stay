@@ -24,6 +24,6 @@ class CapturesController < ApplicationController
 
   private
     def capture_params
-      params.require(:capture).permit(:capture)
+      params.require(:capture).permit(:capture, :rssi, :snr)
     end
 end

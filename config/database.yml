@@ -14,8 +14,9 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
-  socket: /var/run/mysqld/mysqld.sock
+  password: password
+  socket: /tmp/mysql.sock
+  host: db
 
 development:
   <<: *default
@@ -50,5 +51,3 @@ test:
 production:
   <<: *default
   database: room-stay-app_production
-  username: room-stay-app
-  password: <%= ENV['ROOM-STAY-APP_DATABASE_PASSWORD'] %>
