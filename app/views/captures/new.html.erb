@@ -1,16 +1,17 @@
 <% provide(:title, 'Capture') %>
-<h1>Index</h1>
+<h1>パケット一覧</h1>
 
 <table border="1">
   <tr>
-    <th>MACアドレス</th> <th>RSSI</th> <th>SNR</th> <th>受信日時</th>
+    <th>デバイス名</th> <th>送信元のMACアドレス</th> <th>RSSI</th> <th>SNR</th> <th>受信日時</th>
   </tr>
   <% @captures.each do |capture| %>
     <tr>
-      <td><%= capture.capture %></td>
-      <td align="right"><%= capture.rssi %>dBm</td>
-      <td align="right"><%= capture.snr %></td>
-      <td><%= capture.created_at %></td>
+      <td align="center"><%= capture.pcdev %></td>
+      <td align="center"><%= capture.mac %></td>
+      <td align="center"><%= capture.rssi %>dBm</td>
+      <td align="center"><%= capture.snr %>dBm</td>
+      <td align="center"><%= capture.created_at %></td>
     </tr>
   <% end %>
 </table>

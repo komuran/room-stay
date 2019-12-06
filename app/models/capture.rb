@@ -1,5 +1,6 @@
 class Capture < ApplicationRecord
-    validates :capture, presence: true
+    validates :pcdev, presence: true
+    validates :mac, presence: true
     validates :rssi, presence: true
     validates :snr, presence: true
 end
