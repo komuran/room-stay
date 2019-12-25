@@ -32,15 +32,11 @@ nexmon/setup1: ## setup nexmon
 	ln -fs /usr/local/lib/libmpfr.so /usr/lib/arm-linux-gnueabihf/libmpfr.so.4
 
 nexmon/setup2: ## setup nexmon
-	cd ~/nexmon/patches/bcm43455c0/7_45_154/nexmon/ &&\
+	cd ~/nexmon/patches/bcm43455c0/7_45_189/nexmon/ &&\
 	make && make backup-firmware && make install-firmware
 	cd ~/nexmon/utilities/nexutil/ &&\
 	make && make install
 	apt-get remove wpasupplicant
-
-nexmon/patch: ## monitor mode patch
-	iw phy `iw dev wlan0 info | gawk '/wiphy/ {printf "phy" $2}'` interface add mon0 type monitor
-	ifconfig mon0 up
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z/_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'

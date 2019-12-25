@@ -5,7 +5,7 @@
 - デバイス: Raspberry Pi 3 ModelB+
 - Raspbian OS: 4.14.X
 
-## 環境構築
+## 環境構築(Raspberry Pi側)
 
 ### nexmon
 
@@ -31,7 +31,7 @@ https://github.com/seemoo-lab/nexmon
         # make support/1
         # make support/2
         # make support/3
-        # cd ~/nexmon/patches/bcm43455c0/7_45_154/nexmon/
+        # cd ~/nexmon/patches/bcm43455c0/7_45_189/nexmon/
         # sed -i -e 's/ifeq ($(findstring 4.9,$(shell uname -r)),4.9)/ifeq ($(findstring 4.9.,$(shell uname -r)),4.9.)/g' Makefile
         # sed -i -e 's/else ifeq ($(findstring 4.14,$(shell uname -r)),4.14)/else ifeq ($(findstring 4.14.,$(shell uname -r)),4.14.)/g' Makefile
         # reboot
@@ -56,7 +56,7 @@ https://github.com/seemoo-lab/nexmon
 - 再起動後でも自動的にドライバが使えるようにする
         
         # modinfo brcmfmac 
-        (filename: /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/$ # brcm80211/brcmfmac/brcmfmac.ko と表示された場合)
+        (filename: /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko と表示された場合)
         # mv /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko.orig
         # cp ~/nexmon/patches/bcm43455c0/7_45_154/nexmon/brcmfmac_4.14.y-nexmon/brcmfmac.ko /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/
         # depmod -a
@@ -135,11 +135,37 @@ https://qiita.com/kb10uy/items/976a52f687bcb7745fc7
 - `$ bundle install`がうまく通らない場合`Gemfile.lock`を削除する
 --->
 
+## 環境構築(Mac側)
+
+### Docker
+
+- brewでDockerをインストール
+
+        $ brew install docker docker-compose
+        $ brew cask install docker
+
+- 以下のコマンドでDockerのバージョンとアプリケーションフォルダのDocker.appが作成されていることが確認できればインストール完了
+
+        $ docker --version
+        Docker version 19.03.2, build 6a30dfc
+
+- Docker.appの起動
+
+        $ open /Applications/Docker.app
+
 ## 本リポジトリの使い方
+
+### MySQLの準備
+
+        $ cd room-stay
+        $ make
+        $ make run
+
+http://localhost:3000
 
 ### capture.cppの書き換え
 
-- 62行目の`<raspi IP>`をパケットキャプチャに使うラズパイのIPアドレスに書き換える
+- 62行目の`<Mac IP>`をMacのIPアドレスに書き換える
 - 125行目の`<SSID>`をパケットキャプチャしたい対象のアクセスポイントのSSIDに書き換える
 
 ### パケットキャプチャの準備
