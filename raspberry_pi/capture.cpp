@@ -88,12 +88,12 @@ public:
 private:
     typedef Dot11::address_type address_type;
     typedef set<address_type> ssids_type;
- 
+
     bool callback(PDU& pdu);
-     
+
     ssids_type ssids;
 };
- 
+
 void BeaconSniffer::run(const std::string& iface) {
     SnifferConfiguration config;
     config.set_immediate_mode(true);
@@ -103,7 +103,7 @@ void BeaconSniffer::run(const std::string& iface) {
     Sniffer sniffer(iface, config);
     sniffer.sniff_loop(make_sniffer_handler(this, &BeaconSniffer::callback));
 }
- 
+
 bool BeaconSniffer::callback(PDU& pdu) {
     // Get the Dot11 layer
     const Dot11ManagementFrame& beacon = pdu.rfind_pdu<Dot11ManagementFrame>();
@@ -111,7 +111,6 @@ bool BeaconSniffer::callback(PDU& pdu) {
     //RadioTap to locate the RSSI
     const RadioTap &radio = pdu.rfind_pdu<RadioTap>();
     int rssi = radio.dbm_signal();
-    int snr = radio.dbm_noise();
 
     // All beacons must have from_ds == to_ds == 0
     if (!beacon.from_ds() && !beacon.to_ds()) {
@@ -131,11 +130,11 @@ bool BeaconSniffer::callback(PDU& pdu) {
 
                 if(ssid == "<SSID>"){  //<SSID>をアクセスポイントのSSIDに書き換える
                     // Display the tuple "address - ssid".
-                    cout << addr << " - " << ssid << " - RSSI: " << rssi << "dBm" << " - SNR: " << snr << endl;
+                    cout << addr << " - " << ssid << " - RSSI: " << rssi << "dBm" << endl;
 
                     std::stringstream post_data;
 
-                    post_data << "capture[pcdev]=<pcdev>&capture[mac]=" << addr << "&capture[rssi]=" << rssi << "&capture[snr]=" << snr; //<pcdev>をパケットキャプチャするデバイスの識別子に書き換える
+                    post_data << "capture[pcdev]=<pcdev>&capture[mac]=" << addr << "&capture[rssi]=" << rssi; //<pcdev>をパケットキャプチャするデバイスの識別子に書き換える
 
                     post(post_data.str().c_str());
                 }
@@ -147,7 +146,7 @@ bool BeaconSniffer::callback(PDU& pdu) {
     }
     return true;
 }
- 
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         cout << "Usage: " <<* argv << " <interface>" << endl;

@@ -15,6 +15,7 @@ services:
   db:
     image: mysql:8
     volumes:
+      - ".:/src"
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/mysql/access.cnf:/home/access.cnf:Z
       - ./docker/mysql/wait.sh:/home/wait.sh:Z

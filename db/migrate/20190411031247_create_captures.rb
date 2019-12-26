@@ -4,7 +4,6 @@ class CreateCaptures < ActiveRecord::Migration[5.2]
       t.string :pcdev
       t.string :mac
       t.integer :rssi
-      t.integer :snr
       t.timestamps
     end
   end
