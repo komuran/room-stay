@@ -5,7 +5,7 @@ all: docker/start migrate/init migrate/up migrate/seed run ## docker start & mig
 bundle/install: ## bundle install
 	$(EXEC) app bundle install
 
-run: ## rais run
+run: ## rails run
 	$(EXEC) app rails s -b 0.0.0.0
 
 migrate/init: ## migrate database
@@ -43,6 +43,9 @@ app/bash: ## app(rails) container bash
 
 db/bash: ## MySQL container bash
 	$(EXEC) db bash
+
+db/backup: ## MySQL backup
+	$(EXEC) db mysqldump --single-transaction -u root -p room_stay_app_development > ./sample.dump
 
 help: ## Display this help screen
 	@grep -E '^[a-zA-Z/_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
