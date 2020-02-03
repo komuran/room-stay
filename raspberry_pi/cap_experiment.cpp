@@ -56,10 +56,10 @@ void post(const char *message) {
     curl_easy_cleanup(curl);
   });
 
-  //　curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "Accept: application/json");
+  // curl_easy_setopt(curl, CURLOPT_HTTPHEADER, "Accept: application/json");
 
   // Set url
-  curl_easy_setopt(curl, CURLOPT_URL, "http://<Mac IP>:3000/captures");  //<Mac IP>をサーバを立ち上げるMacのIPアドレスに書き換える
+  curl_easy_setopt(curl, CURLOPT_URL, "http://<Mac IP>:3000/captures"); //<Mac IP>をサーバを立ち上げるMacのIPアドレスに書き換える
   // Set HTTP method to POST
   curl_easy_setopt(curl, CURLOPT_POST, 1L);
 
@@ -87,11 +87,11 @@ public:
     void run(const string& iface);
 private:
     typedef Dot11::address_type address_type;
-    typedef set<address_type> ssids_type;
+    // typedef set<address_type> ssids_type;
 
     bool callback(PDU& pdu);
 
-    ssids_type ssids;
+    // ssids_type ssids;
 };
 
 void BeaconSniffer::run(const std::string& iface) {
@@ -108,7 +108,7 @@ bool BeaconSniffer::callback(PDU& pdu) {
     // Get the Dot11 layer
     const Dot11ManagementFrame& beacon = pdu.rfind_pdu<Dot11ManagementFrame>();
 
-    //RadioTap to locate the RSSI
+    // RadioTap to locate the RSSI
     const RadioTap &radio = pdu.rfind_pdu<RadioTap>();
     int rssi = radio.dbm_signal();
 
@@ -117,18 +117,18 @@ bool BeaconSniffer::callback(PDU& pdu) {
         // Get the AP address
         address_type addr = beacon.addr2();
         // Look it up in our set
-        ssids_type::iterator it = ssids.find(addr);
-        if (it == ssids.end()) {
+        // ssids_type::iterator it = ssids.find(addr);
             // First time we encounter this BSSID.
+        if (addr == "<sender MAC address>") { // <sender MAC address>にprobe requestの送信元MACアドレスに書き換える
             try {
                 /* If no ssid option is set, then Dot11::ssid will throw 
-                 * a std::runtime_error.
-                 */
+                * a std::runtime_error.
+                */
                 string ssid = beacon.ssid();
                 // Save it so we don't show it again.
-                ssids.insert(addr);
+                // ssids.insert(addr);
 
-                if(ssid == "<SSID>"){  // <SSID>をアクセスポイントのSSIDに書き換える
+                if(ssid == "<SSID>"){ // <SSID>をアクセスポイントのSSIDに書き換える
                     // Display the tuple "address - ssid".
                     cout << addr << " - " << ssid << " - RSSI: " << rssi << "dBm" << endl;
 
