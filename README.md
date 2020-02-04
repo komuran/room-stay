@@ -58,7 +58,7 @@ https://github.com/seemoo-lab/nexmon
         # modinfo brcmfmac 
         (filename: /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko と表示された場合)
         # mv /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko.orig
-        # cp ~/nexmon/patches/bcm43455c0/7_45_154/nexmon/brcmfmac_4.14.y-nexmon/brcmfmac.ko /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/
+        # cp ~/nexmon/patches/bcm43455c0/7_45_189/nexmon/brcmfmac_4.14.y-nexmon/brcmfmac.ko /lib/modules/4.14.98-v7+/kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/
         # depmod -a
         # reboot
 
