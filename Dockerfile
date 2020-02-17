@@ -8,7 +8,7 @@ WORKDIR $APP_ROOT
 
 # 必要なものをインストール
 RUN apt-get update
-RUN apt-get install -y apt-utils nodejs default-mysql-client
+RUN apt-get install -y apt-utils nodejs default-mysql-client mysql-server
 RUN rm -rf /var/lib/apt/lists/*
 
 # ホスト側のGemfileをコピー
